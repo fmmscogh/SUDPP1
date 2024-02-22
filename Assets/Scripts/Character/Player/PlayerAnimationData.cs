@@ -48,5 +48,7 @@ public class PlayerAnimationData
 
         AttackParameterHash = Animator.StringToHash(attackParameterName);
         ComboAttackParameterHash = Animator.StringToHash(comboAttackParameterName);
+
+        BaseAttackParameterHash = Animator.StringToHash(baseAttackParameterName);
     }
 }
