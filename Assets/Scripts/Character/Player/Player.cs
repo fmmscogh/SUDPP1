@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Controller = GetComponent<CharacterController>();
         ForceReceiver = GetComponent<ForceReceiver>();
+        CharacterHealth = GetComponent<CharacterHealth>();
 
         stateMachine = new PlayerStateMachine(this);
     }
@@ -39,6 +40,8 @@ public class Player : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         stateMachine.ChangeState(stateMachine.IdleState);
+
+        CharacterHealth.OnDie += OnDie;
     }
 
     private void Update()
@@ -50,6 +53,12 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
+    }
+
+    void OnDie()
+    {
+        Animator.SetTrigger("Die");
+        enabled = false;
     }
 }
 
