@@ -15656,7 +15656,7 @@ MonoBehaviour:
     attackParameterName: '@Attack'
     comboAttackParameterName: ComboAttack
     baseAttackParameterName: BaseAttack
-  <Weapon>k__BackingField: {fileID: 0}
+  <Weapon>k__BackingField: {fileID: 1523342171}
 --- !u!143 &687830750
 CharacterController:
   m_ObjectHideFlags: 0
