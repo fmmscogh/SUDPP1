@@ -34,6 +34,12 @@ public class EnemyAttackState : EnemyBaseState
     {
         base.Update();
 
+        if (!IsInAttackRange())
+        {
+            stateMachine.ChangeState(stateMachine.ChasingState);
+            return;
+        }
+
         ForceMove();
 
         float normalizedTime = GetNormalizedTime(stateMachine.Enemy.Animator, "Attack");
@@ -79,5 +85,14 @@ public class EnemyAttackState : EnemyBaseState
 
         stateMachine.Enemy.ForceReceiver.AddForce(stateMachine.Enemy.transform.forward * stateMachine.Enemy.Data.Force);
 
+    }
+
+    private bool IsInAttackRange()
+    {
+        if (stateMachine.Target.IsDead) { return false; }
+
+        float playerDistanceSqr = (stateMachine.Target.transform.position - stateMachine.Enemy.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= stateMachine.Enemy.Data.AttackRange * stateMachine.Enemy.Data.AttackRange;
     }
 }
